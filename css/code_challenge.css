@@ -1,0 +1,125 @@
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #007bff;
+    color: white;
+    padding: 16px;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+.nav-tabs .nav-link {
+    border-radius: 0;
+    font-weight: bold;
+}
+
+.nav-link.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.tab-content {
+    border-top: 1px solid #007bff;
+    padding-top: 20px;
+}
+
+pre {
+    background-color: #e9ecef;
+    border-radius: 4px;
+    padding: 15px;
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
+textarea {
+    border-radius: 4px;
+}
+
+.btn-primary {
+    background-color: gray;
+    border-color: gray;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+#timer {
+    font-size: 1.25rem;
+    color: #dc3545;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#hintSection {
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    padding: 10px;
+    background-color: #f0f8ff;
+}
+
+#hintSection .btn-info {
+    border-color: #007bff;
+}
+
+#hintContent {
+    background-color: #e9ecef;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+@media (max-width: 576px) {
+    .card {
+        margin: 0 10px;
+    }
+
+    .card-header {
+        font-size: 1.25rem;
+    }
+
+    #timer {
+        font-size: 1rem;
+    }
+}
+
+.no-select {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+body.dark-mode {
+    background-color: #212529;
+    color: #f8f9fa;
+}
+
+body.dark-mode .card {
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+
+body.dark-mode .card-header {
+    background-color: #495057;
+}
+
+body.dark-mode #hintSection {
+    background-color: #495057;
+    border-color: #343a40;
+}
+
+body.dark-mode #hintContent {
+    background-color: #6c757d;
+}

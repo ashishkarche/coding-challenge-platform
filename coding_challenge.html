@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Challenge</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/code_challenge.css" rel="stylesheet">
+</head>
+
+<body class="no-select">
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8">
+                <div class="card shadow-lg border-light rounded">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h3>Coding Challenge Guess Output</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="timer" class="text-danger mb-4">Time left: 15:00</div> <!-- Timer display -->
+
+                        <!-- Language Tabs -->
+                        <ul class="nav nav-tabs" id="languageTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="cpp-tab" data-bs-toggle="tab" data-bs-target="#cpp" type="button" role="tab" aria-controls="cpp" aria-selected="true">C++</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="java-tab" data-bs-toggle="tab" data-bs-target="#java" type="button" role="tab" aria-controls="java" aria-selected="false">Java</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="python-tab" data-bs-toggle="tab" data-bs-target="#python" type="button" role="tab" aria-controls="python" aria-selected="false">Python</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="js-tab" data-bs-toggle="tab" data-bs-target="#js" type="button" role="tab" aria-controls="js" aria-selected="false">JavaScript</button>
+                            </li>
+                        </ul>
+
+                        <!-- Tab Content -->
+                        <div class="tab-content mt-3" id="languageTabsContent">
+                            <div class="tab-pane fade show active" id="cpp" role="tabpanel" aria-labelledby="cpp-tab">
+                                <pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+// Function to generate subsets
+void calcSubset(vector&lt;int&gt;& A, vector&lt;vector&lt;int&gt;&gt;& res,
+                vector&lt;int&gt;& subset, int index) {
+    res.push_back(subset);
+    for (int i = index; i &lt; A.size(); i++) {
+        subset.push_back(A[i]);
+        calcSubset(A, res, subset, i + 1);
+        subset.pop_back();
+    }
+}
+
+// Function to generate all subsets
+vector&lt;vector&lt;int&gt;&gt; subsets(vector&lt;int&gt;& A) {
+    vector&lt;int&gt; subset;
+    vector&lt;vector&lt;int&gt;&gt; res;
+    int index = 0;
+    calcSubset(A, res, subset, index);
+    return res;
+}
+
+// Main function
+int main() {
+    vector&lt;int&gt; array = { 1, 2, 3 };
+    vector&lt;vector&lt;int&gt;&gt; res = subsets(array);
+    for (int i = 0; i &lt; res.size(); i++) {
+        for (int j = 0; j &lt; res[i].size(); j++)
+            cout &lt;&lt; res[i][j] &lt;&lt; " ";
+        cout &lt;&lt; endl;
+    }
+    return 0;
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane fade" id="java" role="tabpanel" aria-labelledby="java-tab">
+                                <pre><code>import java.util.ArrayList;
+import java.util.List;
+
+// Function to generate subsets
+public class Subsets {
+    public static void calcSubset(List&lt;Integer&gt; A,
+                                  List&lt;List&lt;Integer&gt;&gt; res,
+                                  List&lt;Integer&gt; subset,
+                                  int index) {
+        res.add(new ArrayList&lt;&gt;(subset));
+        for (int i = index; i &lt; A.size(); i++) {
+            subset.add(A.get(i));
+            calcSubset(A, res, subset, i + 1);
+            subset.remove(subset.size() - 1);
+        }
+    }
+
+    // Function to generate all subsets
+    public static List&lt;List&lt;Integer&gt;&gt; subsets(List&lt;Integer&gt; A) {
+        List&lt;Integer&gt; subset = new ArrayList&lt;&gt;();
+        List&lt;List&lt;Integer&gt;&gt; res = new ArrayList&lt;&gt;();
+        calcSubset(A, res, subset, 0);
+        return res;
+    }
+
+    public static void main(String[] args) {
+        List&lt;Integer&gt; array = List.of(1, 2, 3);
+        List&lt;List&lt;Integer&gt;&gt; res = subsets(array);
+        for (List&lt;Integer&gt; subset : res) {
+            for (Integer num : subset) {
+                System.out.print(num + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane fade" id="python" role="tabpanel" aria-labelledby="python-tab">
+                                <pre><code># Function to generate subsets
+def calcSubset(A, res, subset, index):
+    res.append(subset[:])
+    for i in range(index, len(A)):
+        subset.append(A[i])
+        calcSubset(A, res, subset, i + 1)
+        subset.pop()
+
+# Function to generate all subsets
+def subsets(A):
+    subset = []
+    res = []
+    index = 0
+    calcSubset(A, res, subset, index)
+    return res
+
+# Main function
+if __name__ == "__main__":
+    array = [1, 2, 3]
+    res = subsets(array)
+    for subset in res:
+        print(*subset)
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane fade" id="js" role="tabpanel" aria-labelledby="js-tab">
+                                <pre><code>// Function to generate subsets
+function calcSubset(A, res, subset, index) {
+    res.push([...subset]);
+    for (let i = index; i < A.length; i++) {
+        subset.push(A[i]);
+        calcSubset(A, res, subset, i + 1);
+        subset.pop();
+    }
+}
+
+// Function to generate all subsets
+function subsets(A) {
+    const subset = [];
+    const res = [];
+    let index = 0;
+    calcSubset(A, res, subset, index);
+    return res;
+}
+
+// Main function
+function main() {
+    const array = [1, 2, 3];
+    const res = subsets(array);
+    for (let i = 0; i < res.length; i++) {
+        console.log(res[i].join(' '));
+    }
+}
+main();
+</code></pre>
+                            </div>
+                        </div>
+
+                        <!-- Output Form -->
+                        <div class="mt-4">
+                            <form id="outputForm">
+                                <div class="mb-3">
+                                    <label for="output" class="form-label">Your Output:</label>
+                                    <textarea class="form-control" id="output" rows="6" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+
+                        <!-- Result -->
+                        <div id="result" class="mt-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/output.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
