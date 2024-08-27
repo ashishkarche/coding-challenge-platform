@@ -1,3 +1,4 @@
+// Disable right-click, copy, cut, and paste
 document.addEventListener('contextmenu', function (event) {
     event.preventDefault(); // Disable right-click context menu
 });
@@ -38,6 +39,36 @@ function updateTimer() {
     }
 }
 
+// Initial chance counts
+let hintChances = 5;
+let outputAttempts = 10;
+
+// Function to handle hint display
+function showHint() {
+    if (hintChances > 0) {
+        const hintContent = document.getElementById('hintContent');
+        const randomHint = hints[Math.floor(Math.random() * hints.length)];
+
+        // Display the hint
+        hintContent.textContent = randomHint;
+        hintContent.style.display = 'block';
+
+        // Hide the hint after 5 seconds
+        setTimeout(() => {
+            hintContent.style.display = 'none';
+        }, 5000); // 5000 milliseconds = 5 seconds
+
+        // Decrease hint chances
+        hintChances--;
+        if (hintChances === 0) {
+            document.getElementById('hintButton').disabled = true;
+        }
+    } else {
+        alert('No more hints available.');
+    }
+}
+
+// Function to handle output submission
 document.getElementById('outputForm').addEventListener('submit', function (event) {
     event.preventDefault();
 
@@ -46,21 +77,31 @@ document.getElementById('outputForm').addEventListener('submit', function (event
 
     let resultElement = document.getElementById('result');
 
-    let startTime = getCookie('startTime');
-    let currentTime = new Date().getTime();
-    let timePassed = currentTime - startTime;
+    if (outputAttempts > 0) {
+        let startTime = getCookie('startTime');
+        let currentTime = new Date().getTime();
+        let timePassed = currentTime - startTime;
 
-    if (timePassed > 15 * 60 * 1000) {
-        alert('Time limit reached');
-        document.body.innerHTML = ''; // Clear the content
-    } else {
-        if (userOutput === expectedOutput.trim()) {
-            resultElement.innerHTML = '<div class="alert alert-success">Correct! The output matches the expected result. Congratulations!</div>';
+        if (timePassed > 15 * 60 * 1000) {
+            alert('Time limit reached');
+            document.body.innerHTML = ''; // Clear the content
         } else {
-            resultElement.innerHTML = '<div class="alert alert-danger">Incorrect! Please try again.</div>';
+            if (userOutput === expectedOutput.trim()) {
+                resultElement.innerHTML = '<div class="alert alert-success"><span class="alert-icon">&#10004;</span>Correct! The output matches the expected result. Congratulations!</div>';
+            } else {
+                resultElement.innerHTML = '<div class="alert alert-danger"><span class="alert-icon">&#10008;</span>Incorrect! Please try again.</div>';
+                outputAttempts--;
+                if (outputAttempts === 0) {
+                    document.getElementById('outputForm').reset();
+                    alert('No more attempts left.');
+                }
+            }
         }
+    } else {
+        alert('No more attempts left.');
     }
 });
+
 
 window.onload = function () {
     let startTime = getCookie('startTime');
@@ -70,3 +111,15 @@ window.onload = function () {
     }
     updateTimer();
 };
+
+// Array of hints
+const hints = [
+    "Think about how to handle subsets of different sizes.",
+    "Consider using recursion to solve the problem.",
+    "Make sure your function is generating all possible subsets.",
+    "Check how different programming languages handle arrays or lists.",
+    "Remember to include edge cases, like an empty array."
+];
+
+// Add event listener to hint button
+document.getElementById('hintButton').addEventListener('click', showHint);

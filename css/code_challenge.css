@@ -1,13 +1,22 @@
+/* General Styles */
 body {
     background-color: #f8f9fa;
     font-family: Arial, sans-serif;
     color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 100%;
+    padding: 0 15px;
 }
 
 .card {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 15px 0;
 }
 
 .card-header {
@@ -43,6 +52,7 @@ pre {
 
 textarea {
     border-radius: 4px;
+    resize: vertical; /* Allow vertical resizing only */
 }
 
 .btn-primary {
@@ -63,37 +73,6 @@ textarea {
     margin-bottom: 20px;
 }
 
-#hintSection {
-    border: 1px solid #007bff;
-    border-radius: 4px;
-    padding: 10px;
-    background-color: #f0f8ff;
-}
-
-#hintSection .btn-info {
-    border-color: #007bff;
-}
-
-#hintContent {
-    background-color: #e9ecef;
-    border-radius: 4px;
-    padding: 10px;
-}
-
-@media (max-width: 576px) {
-    .card {
-        margin: 0 10px;
-    }
-
-    .card-header {
-        font-size: 1.25rem;
-    }
-
-    #timer {
-        font-size: 1rem;
-    }
-}
-
 .no-select {
     user-select: none;
     -webkit-user-select: none;
@@ -101,25 +80,199 @@ textarea {
     -ms-user-select: none;
 }
 
-body.dark-mode {
-    background-color: #212529;
-    color: #f8f9fa;
+/* Hint Section Styles */
+#hintSection {
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    background-color: #f0f8ff;
+    padding: 10px;
 }
 
-body.dark-mode .card {
-    background-color: #343a40;
-    color: #f8f9fa;
+#hintSection .btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    color: #fff;
 }
 
-body.dark-mode .card-header {
-    background-color: #495057;
+#hintSection .btn-info:hover {
+    background-color: #138496;
+    border-color: #117a8b;
 }
 
-body.dark-mode #hintSection {
-    background-color: #495057;
-    border-color: #343a40;
+#hintSection h5 {
+    color: #007bff;
+    margin: 0;
 }
 
-body.dark-mode #hintContent {
-    background-color: #6c757d;
+#hintContent {
+    background-color: #e9ecef;
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 10px;
+    display: none; /* Hidden by default */
+}
+
+/* Responsive Styles */
+
+/* For tablets and larger phones (max-width: 768px) */
+@media (max-width: 768px) {
+    .card-header {
+        font-size: 1.25rem;
+        padding: 12px;
+    }
+
+    .nav-tabs .nav-link {
+        font-size: 0.875rem;
+    }
+
+    .tab-content {
+        padding-top: 15px;
+    }
+
+    pre {
+        font-size: 0.875rem;
+    }
+
+    textarea {
+        font-size: 0.875rem;
+    }
+
+    #timer {
+        font-size: 1rem;
+    }
+
+    #hintSection {
+        padding: 8px;
+    }
+
+    #hintContent {
+        font-size: 0.875rem;
+    }
+
+    .container {
+        padding: 0 10px;
+    }
+}
+
+/* For mobile phones (max-width: 576px) */
+@media (max-width: 576px) {
+    .card-header {
+        font-size: 1rem;
+        padding: 8px;
+    }
+
+    .nav-tabs .nav-link {
+        font-size: 0.75rem;
+    }
+
+    .tab-content {
+        padding-top: 10px;
+    }
+
+    pre {
+        font-size: 0.75rem;
+    }
+
+    textarea {
+        font-size: 0.75rem;
+    }
+
+    #timer {
+        font-size: 0.875rem;
+    }
+
+    #hintSection {
+        padding: 6px;
+    }
+
+    #hintContent {
+        font-size: 0.75rem;
+    }
+
+    .container {
+        padding: 0 5px;
+    }
+
+    .card {
+        margin: 10px 0;
+    }
+}
+
+/* For very small devices (max-width: 360px) */
+@media (max-width: 360px) {
+    .card-header {
+        font-size: 0.875rem;
+        padding: 6px;
+    }
+
+    .nav-tabs .nav-link {
+        font-size: 0.65rem;
+    }
+
+    .tab-content {
+        padding-top: 5px;
+    }
+
+    pre {
+        font-size: 0.65rem;
+    }
+
+    textarea {
+        font-size: 0.65rem;
+    }
+
+    #timer {
+        font-size: 0.75rem;
+    }
+
+    #hintSection {
+        padding: 4px;
+    }
+
+    #hintContent {
+        font-size: 0.65rem;
+    }
+}
+
+
+/* Alert Styles */
+.alert {
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.alert-success .alert-icon {
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+.alert-danger .alert-icon {
+    color: #721c24;
+}
+
+/* Optional: Adding some icons to the alerts */
+.alert-icon {
+    margin-right: 10px;
+    font-size: 1.25rem;
+}
+
+/* Ensuring responsiveness */
+@media (max-width: 768px) {
+    .alert {
+        font-size: 0.875rem;
+        padding: 10px;
+    }
 }
