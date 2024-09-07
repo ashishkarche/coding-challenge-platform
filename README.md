@@ -24,5 +24,5 @@ Welcome to the Coding Challenge Platform! This project provides an interactive c
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/your-username/coding-challenge-platform.git
+   git clone https://github.com/ashishkarche/coding-challenge-platform.git
    cd coding-challenge-platform
